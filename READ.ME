@@ -1,0 +1,88 @@
+# ABAP Program: Parameters & Select-Options Example
+
+## 📌 Overview
+This ABAP program demonstrates how to use:
+- **PARAMETERS** (for single value input)
+- **SELECT-OPTIONS** (for multiple values or range inputs)
+  
+It fetches **Material Master** data from the `MARA` table based on:
+- The material number entered in the `p_matnr` parameter.
+- OR the material numbers/range entered in the `s_matnr` select-option.
+
+---
+
+## 📂 Files
+- **zparam_selectopt_demo.abap** → ABAP source code.
+- **README.md** → Documentation and explanation.
+
+---
+
+## ⚙️ How It Works
+1. **TABLES: mara**
+   - Links the program to the database table `MARA`.
+
+2. **PARAMETERS**
+   - `p_matnr` → Accepts a single material number.
+
+3. **SELECT-OPTIONS**
+   - `s_matnr` → Accepts multiple material numbers, ranges, or patterns.
+
+4. **DATA Declaration**
+   - `it_mara` → Internal table to hold fetched records.
+   - `wa_mara` → Work area for looping.
+
+5. **SELECT Statement**
+   - Retrieves all materials from `MARA` that match either:
+     - `p_matnr` (single input) OR
+     - Any value in `s_matnr` (multiple inputs).
+
+6. **SY-SUBRC**
+   - If no records are found, a message is displayed.
+
+7. **LOOP AT**
+   - Displays material number, type, and industry sector.
+
+---
+
+## ▶️ Execution Steps
+1. Go to transaction **SE38** or **SE80** in SAP.
+2. Create a new program named `ZPARAM_SELECTOPT_DEMO`.
+3. Paste the ABAP code from `zparam_selectopt_demo.abap`.
+4. Activate the program (**Ctrl+F3**).
+5. Execute (**F8**).
+6. Enter:
+   - A single material number in **p_matnr**, OR
+   - Multiple/range values in **s_matnr**.
+7. View the output in the list.
+
+---
+
+## 📝 Example Inputs
+| p_matnr  | s_matnr (Select-Option) | Output Records |
+|----------|------------------------|----------------|
+| MAT001   | (empty)                 | 1 record (MAT001) |
+| (empty)  | MAT001 to MAT005        | All materials in range |
+| MAT999   | MAT001, MAT002          | MAT999 + MAT001 + MAT002 |
+
+---
+
+## 📖 ABAP Keyword Explanations
+| Keyword       | Purpose |
+|---------------|---------|
+| `TABLES`      | Links dictionary table to program. |
+| `PARAMETERS`  | Single input field on selection screen. |
+| `SELECT-OPTIONS` | Multiple/range input on selection screen. |
+| `DATA`        | Declares variables, internal tables, work areas. |
+| `SELECT ... INTO TABLE` | Retrieves DB data into an internal table. |
+| `WHERE ... OR ...` | Conditional filter in the query. |
+| `SY-SUBRC`    | System return code after statements. |
+| `MESSAGE`     | Displays a message to the user. |
+| `LOOP AT`     | Iterates through an internal table. |
+| `WRITE`       | Outputs data to the list screen. |
+
+---
+
+## 📌 Notes
+- `MARA` is a standard SAP table that contains general material data.
+- Make sure the material numbers you enter actually exist in your system.
+- You can modify the code to add more fields from `MARA` as needed.
